@@ -1,0 +1,10 @@
+*.dat
+home/migrations
+home/__pycache__
+parallelus/__pycache__
+home/.DS_Store
+home/bibles/.DS_Store
+home/static/.DS_Store
+db.sqlite3
+Procfile
+.DS_Store
