@@ -1,0 +1,196 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="favicon.ico">
+        
+        <title>Como integrar Django y Bootstrap 4 </title>
+        
+        {# Cargamos la librería #}
+        {% load bootstrap4 %}
+        
+        {# CSS Bootstrap #}
+        {% bootstrap_css %}
+        {% load static %}
+        <link href="{% static 'home/offcanvas.css' %}" rel="stylesheet">
+    </head>
+    <body class="bg-light">
+         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+            <div class="row" style="width:100%">
+              <div class="col">
+                  <a class="navbar-brand mr-auto mr-lg-0" href="#">Parallelus</a>
+                  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                     <span class="navbar-toggler-icon"></span>
+                  </button>
+              </div>
+              <div class="col">
+                <select class="form-control" id="libro">
+                  <option>Libro</option>
+                    {% for book in books %}
+                      <option value="{{ book.num }}">{{ book.name }}</option>  
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="col">
+                  <select class="form-control" id="capitulo" disabled>
+                      <option>Capítulo</option>
+                      {% for i in n %}
+                        <option value="{{ i }}">{{ i }}</option>  
+                      {% endfor %}  
+                    
+                    </select>
+                </div>
+                <div class="col">
+
+                    <select class="form-control" id="verso" disabled>
+                        <option>Verso</option>
+                        {% for i in n %}
+                        <option value="{{ i }}">{{ i }}</option>  
+                      {% endfor %}   
+                      </select>
+                  </div>
+                  <div class="col">
+                     
+                          <input class="form-control" type="text" placeholder="Búsqueda" aria-label="Search">
+                     
+                  </div>
+                  <div class="col">
+                      <button class="btn btn-outline-success" type="submit">Buscar</button>
+                  </div>
+                  
+                  
+
+              </div>
+            </nav>
+                
+                <div class="nav-scroller bg-white shadow-sm">
+                  <nav class="nav nav-underline">
+                    <a class="nav-link active" href="#">Dashboard</a>
+                    <a class="nav-link" href="#">
+                      Friends
+                      <span class="badge badge-pill bg-light align-text-bottom">27</span>
+                    </a>
+                    <a class="nav-link" href="#">Explore</a>
+                    <a class="nav-link" href="#">Suggestions</a>
+                    <a class="nav-link" href="#">Link1</a>
+                    <a class="nav-link" href="#">Link2</a>
+                    </nav>
+                </div>
+                
+                <main role="main" class="container">
+                  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
+                        <svg style="font-size: 35px;margin-right: 12px;color: white;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
+                        </svg>
+                                       
+                    <div class="lh-100">
+                      <h6 class="mb-0 text-white lh-100">Versiones</h6>
+                      <small>2020</small>
+                    </div>
+                  </div>
+                
+                  <div class="my-3 p-3 bg-white rounded shadow-sm">
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Revisiones seleccionadas</h6>
+                    <div class="media text-muted pt-3">
+                            <svg style="font-size: 35px;margin-right: 12px;color:#145cc9;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
+                            </svg>
+                      <p id="torah" class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark">@Torah</strong>
+                        
+                      </p>
+                    </div>
+                    <div class="media text-muted pt-3">
+                            <svg style="font-size: 35px;margin-right: 12px;color:#1ac914;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
+                            </svg>
+                      <p id="oso" class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark">@Biblia del Oso</strong>
+                        
+                      </p>
+                    </div>
+                    <div class="media text-muted pt-3">
+                            <svg style="font-size: 35px;margin-right: 12px;color:#dc3545" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
+                            </svg>
+                      <p id="jerusalem" class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <strong class="d-block text-gray-dark">@Jerusalem</strong>
+                        
+                      </p>
+                    </div>
+                    <small class="d-block text-right mt-3">
+                      <a href="#">All updates</a>
+                    </small>
+                  </div>
+                
+                  <div class="my-3 p-3 bg-white rounded shadow-sm">
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
+                    <div class="media text-muted pt-3">
+                      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                          <strong class="text-gray-dark">Full Name</strong>
+                          <a href="#">Follow</a>
+                        </div>
+                        <span class="d-block">@username</span>
+                      </div>
+                    </div>
+                    <div class="media text-muted pt-3">
+                      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                          <strong class="text-gray-dark">Full Name</strong>
+                          <a href="#">Follow</a>
+                        </div>
+                        <span class="d-block">@username</span>
+                      </div>
+                    </div>
+                    <div class="media text-muted pt-3">
+                      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                          <strong class="text-gray-dark">Full Name</strong>
+                          <a href="#">Follow</a>
+                        </div>
+                        <span class="d-block">@username</span>
+                      </div>
+                    </div>
+                    <small class="d-block text-right mt-3">
+                      <a href="#">All suggestions</a>
+                    </small>
+                  </div>
+                </main>
+        {% bootstrap_javascript jquery='full' %}
+        <script>
+          $( "#libro" ).change(function() {
+            $("#capitulo").prop('disabled', false);
+          });
+          $( "#capitulo" ).change(function() {
+            $("#verso").prop('disabled', false);
+          });
+          </script>
+          
+          <script>
+          $( "#verso" ).change(function() {
+            
+            $.post( "ajax/test/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), verso: $("#verso").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
+          .done(function( data ) {
+            $("#torah").append(data.torah);
+            $("#oso").append(data.oso);
+            $("#jerusalem").append(data.jerusalem);
+            //console.log( "torah: " + data.torah );
+            //console.log( "oso: " + data.oso );
+            //console.log( "jerusalem: " + data.jerusalem );
+          });
+            
+          });
+      
+        </script>
+    </body>
+</html>
