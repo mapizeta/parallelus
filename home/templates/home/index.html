@@ -93,86 +93,47 @@
                   </div>
                 
                   <div class="my-3 p-3 bg-white rounded shadow-sm">
-                    <h6 class="border-bottom border-gray pb-2 mb-0">Revisiones seleccionadas</h6>
+                    <h6 class="border-bottom border-gray pb-2 mb-0"><div style="font-size: 24px;" id="hebreo">&#64305;&#1456;&#1512;&#1461;&#1488;&#64298;&#1460;&#1497;&#1514; &#64305;&#1464;&#1512;&#1464;&#1488; &#1488;&#1457;&#1500;&#1465;&#1492;&#1460;&#1497;&#1501; &#1488;&#1461;&#1514; &#1492;&#1463;&#64300;&#1464;&#1502;&#1463;&#1497;&#1460;&#1501; &#1493;&#1456;&#1488;&#1461;&#1514; &#1492;&#1464;&#1488;&#1464;&#1512;&#1462;&#1509;</div></h6>
                     
+                    {% for bible in bibles_active %}
                     <div class="media text-muted pt-3">
-                      <div><svg style="font-size: 35px;margin-right: 12px;color:#145cc9;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/></svg></div>
-                      <div style="width:100%">
-                          <strong class="d-block text-gray-dark">@Torah</strong>
-                          <div id="torah"></div>
-                          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
+                        <div><svg style="font-size: 35px;margin-right: 12px;color:#145cc9;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/></svg></div>
+                        <div style="width:100%">
+                            <strong class="d-block text-gray-dark">@{{ bible.label }}</strong>
+                            <div id="bible{{ bible.id }}"></div>
+                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
+                        </div>
                       </div>
-                                        
-                    </div>
-                    <div class="media text-muted pt-3">
-                      <div><svg style="font-size: 35px;margin-right: 12px;color:#1ac914;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
-                        <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
-                    </svg></div>    
-                      <div style="width:100%">
-                        <strong class="d-block text-gray-dark">@Biblia del Oso</strong>
-                        
-                        <div id="oso"></div>
-                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
-                      </div>
-                    </div>
-                    <div class="media text-muted pt-3">
-                      <div>      
-                      <svg style="font-size: 35px;margin-right: 12px;color:#dc3545" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
-                                <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
-                            </svg>
-                            </div>
-                            <div>
-
-                                <strong class="d-block text-gray-dark">@Jerusalem</strong>
-                                <div id="jerusalem"></div>
-                                <p  class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
-                            </div>
-                    </div>
+                    {% endfor %}
+                    
                     <small class="d-block text-right mt-3">
                       <a href="#">All updates</a>
                     </small>
                   </div>
                 
                   <div class="my-3 p-3 bg-white rounded shadow-sm">
-                    <h6 class="border-bottom border-gray pb-2 mb-0">Suggestions</h6>
+                    <h6 class="border-bottom border-gray pb-2 mb-0">Traducciones disponibles</h6>
+                    {% for bible in bibles %}
                     <div class="media text-muted pt-3">
-                      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                          <strong class="text-gray-dark">Full Name</strong>
-                          <a href="#">Follow</a>
+                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                          <div class="d-flex justify-content-between align-items-center w-100">
+                            <strong class="text-gray-dark">{{ bible.label }}</strong>
+                            <a href="#bible{{ bible.id }}">Activar</a>
+                          </div>
+                          <span class="d-block">@{{ bible.name }}</span>
                         </div>
-                        <span class="d-block">@username</span>
-                      </div>
-                    </div>
-                    <div class="media text-muted pt-3">
-                      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                          <strong class="text-gray-dark">Full Name</strong>
-                          <a href="#">Follow</a>
-                        </div>
-                        <span class="d-block">@username</span>
-                      </div>
-                    </div>
-                    <div class="media text-muted pt-3">
-                      <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                      <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <div class="d-flex justify-content-between align-items-center w-100">
-                          <strong class="text-gray-dark">Full Name</strong>
-                          <a href="#">Follow</a>
-                        </div>
-                        <span class="d-block">@username</span>
-                      </div>
-                    </div>
+                      </div>  
+                    {% endfor %}
                     <small class="d-block text-right mt-3">
                       <a href="#">All suggestions</a>
                     </small>
                   </div>
                 </main>
         {% bootstrap_javascript jquery='full' %}
+        
+        
+        
         <script>
           $( "#libro" ).change(function() {
             $("#capitulo").prop('disabled', false);
@@ -187,12 +148,13 @@
             
             $.post( "ajax/test/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), verso: $("#verso").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
           .done(function( data ) {
-            $("#torah").html(data.torah);
-            $("#oso").html(data.oso);
-            $("#jerusalem").html(data.jerusalem);
-            //console.log( "torah: " + data.torah );
-            //console.log( "oso: " + data.oso );
-            //console.log( "jerusalem: " + data.jerusalem );
+            {% for bible in bibles_active %}
+              $("#bible{{bible.id}}").html(data.bible{{bible.id}});  
+            {% endfor %}
+            $("#hebreo").html(data.hebreo);
+            //$("#oso").html(data.oso);
+            //$("#jerusalem").html(data.jerusalem);
+
           });
             
           });
