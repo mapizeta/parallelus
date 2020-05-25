@@ -6,7 +6,7 @@
         <meta name="author" content="">
         <link rel="icon" href="favicon.ico">
         
-        <title>Como integrar Django y Bootstrap 4 </title>
+        <title>Parallelus BIBLE </title>
         
         {# Cargamos la librería #}
         {% load bootstrap4 %}
@@ -21,7 +21,7 @@
             <div class="row" style="width:100%">
               <div class="col-sm-2">
                   <a class="navbar-brand mr-auto mr-lg-0" href="#">Parallelus</a>
-                  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                  <button id="button-hidden" class="show navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
                      <span class="navbar-toggler-icon"></span>
                   </button>
               </div>
@@ -51,12 +51,12 @@
                       {% endfor %}   
                       </select>
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-2 d-none d-sm-block">
                      
                           <input class="form-control" type="text" placeholder="Búsqueda" aria-label="Search">
                      
                   </div>
-                  <div class="col-sm-2">
+                  <div class="col-sm-2 d-none d-sm-block">
                       <button class="btn btn-outline-success" type="submit">Buscar</button>
                   </div>
                   
@@ -144,6 +144,24 @@
           </script>
           
           <script>
+          
+          $( "#button-hidden" ).click(function() {
+            if($(this).hasClass( "show" ))
+            {
+              $(this).removeClass( "show" );
+              $( "#libro" ).attr("hidden",true);
+              $( "#capitulo" ).attr("hidden",true);
+              $( "#verso" ).attr("hidden",true);
+            }
+            else
+              {
+                $(this).addClass( "show" );
+                $( "#libro" ).attr("hidden",false);
+                $( "#capitulo" ).attr("hidden",false);
+                $( "#verso" ).attr("hidden",false);
+                             
+              }
+          });
           $( "#verso" ).change(function() {
             
             $.post( "ajax/test/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), verso: $("#verso").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
