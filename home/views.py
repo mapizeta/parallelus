@@ -30,7 +30,7 @@ def capitulos(request):
     bible   = pwd+'/bibles/Biblia del Oso.bbli'
     con     = sqlite3.connect(bible)
     cursorObj = con.cursor()
-    capitulos = ''
+    capitulos = '<option value="">Capítulo</option>'
 
     max = int( cursorObj.execute('SELECT MAX(DISTINCT Chapter) FROM Bible WHERE Book = '+libro).fetchall()[0][0] )
     
@@ -47,7 +47,7 @@ def versiculos(request):
     bible   = pwd+'/bibles/Biblia del Oso.bbli'
     con     = sqlite3.connect(bible)
     cursorObj = con.cursor()
-    versiculos = ''
+    versiculos = '<option value="">Selecciona Verso</option>'
 
     max = int( cursorObj.execute('SELECT MAX(DISTINCT Verse) FROM Bible WHERE Book = '+libro+' AND Chapter = '+capitulo).fetchall()[0][0] )
     
