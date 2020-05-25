@@ -1,0 +1,85 @@
+
+INSERT INTO home_bible(name, label, description, file, visible, activo) 
+VALUES ("Israelita Nazarena", "VIN", "Biblia versión Israelia Nazarena", "Biblia  VIN.bbli", 1, 1)
+
+INSERT INTO home_bible(name, label, description, file, visible, activo) 
+VALUES ("Casiodoro de Reina", "Biblia del Oso", "Biblia Versión Casiodoro de Reina", "Biblia del Oso.bbli", 1, 1);
+
+INSERT INTO home_bible(name, label, description, file, visible, activo) 
+VALUES ("Castillian", "Castillian", "Biblia versión Israelia Nazarena", "Biblia Castillian.bbli", 1, 1);
+
+INSERT INTO home_bible(name, label, description, file, visible, activo) 
+VALUES ("Lenguaje Sencillo", "Sencillo", "Lenguaje Sencillo", "Biblia en Lenguaje Sencillo.bbli", 1, 1);
+
+INSERT INTO home_bible(name, label, description, file, visible, activo) 
+VALUES ("Reina Valera 1960", "RVR1960", "RV", "Biblia Reina Valera 1960.bblx", 1, 1);
+
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(6, 'JOSUE', '', '');  
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(7, 'JUECES',  '', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(8, 'RUT',     '', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(9, '1 SAMUEL','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(10, '2 SAMUEL','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(11, '1 REYES','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(12, '2 REYES','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(13, '1 CRONICAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(14, '2 CRONICAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(15, 'ESDRAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(16, 'NEHEMIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(17, 'ESTER','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(18, 'JOB','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(19, 'SALMOS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(20, 'PROVERBIOS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(21, 'ECLESIASTES','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(22, 'CANTARES','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(23, 'ISAIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(24, 'JEREMIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(25, 'LAMENTACIONES','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(26, 'EZEQUIEL','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(27, 'DANIEL','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(28, 'OSEAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(29, 'JOEL','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(30, 'AMOS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(31, 'ABDIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(32, 'JONAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(33, 'MIQUEAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(34, 'NAHUM','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(35, 'HABACUC','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(36, 'SOFONIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(37, 'HAGEO','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(38, 'ZACARIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(39, 'MALAQUIAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(40, 'MATEO','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(41, 'MARCOS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(42, 'LUCAS','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(43, 'JUAN','', '');
+INSERT INTO home_book(num, name, fonetica, hebreo) VALUES(44, 'HECHOS','', '');
+
+
+
+
+
+
+
+
+ROMANOS
+1 CORINTIOS
+2 CORINTIOS
+GALATAS
+EFESIOS
+FILIPENSES
+COLOSENSES
+1 TESALONICENCES
+2 TESALONICENCES
+1 TIMOTEO
+2 TIMOTEO
+TITO
+FILEMON
+HEBREOS
+SANTIAGO
+1 PEDRO
+2 PEDRO
+1 JUAN
+2 JUAN
+3 JUAN
+JUDAS
+APOCALIPSIS

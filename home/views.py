@@ -35,17 +35,26 @@ def ajax (request):
     capitulo    = request.POST['capitulo']
     verso       = request.POST['verso']
     
-    hebreo      = sql ("HOT-ALEPPO.bblx", libro, capitulo, verso)
-
-    args_dict   = { r'\u':'&#', '?':';', r'{\f2':'' }
-    
-    for key in args_dict.keys():
-        hebreo = hebreo.replace(key, str(args_dict[key]))
-
+    args_dict   = { r'\u':'&#', '?':';', r'{\f2':'', r'{\f1':'' }
+                        
     bibles_active   = Bible.objects.filter(activo=1)
     bibles = {}
-    
-    data = {'success': 'true', 'hebreo': hebreo}
+        
+    if int(libro) > 39:
+        griego      = sql ("Griego - Sahidica.bblx", libro, capitulo, verso) 
+        
+        for key in args_dict.keys():
+            griego = griego.replace(key, str(args_dict[key]))
+        
+        interlineal = griego
+    else:
+        hebreo      = sql ("HOT-ALEPPO.bblx", libro, capitulo, verso)
+        for key in args_dict.keys():
+            hebreo = hebreo.replace(key, str(args_dict[key]))
+        
+        interlineal = hebreo
+
+    data = {'success': 'true', 'interlineal': interlineal}
 
     for bible in bibles_active:
         data["bible"+str(bible.id)] = sql (bible.file, libro, capitulo, verso)
