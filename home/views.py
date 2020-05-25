@@ -12,11 +12,7 @@ def index (request):
     bibles          = Bible.objects.all()
     bibles_active   = Bible.objects.filter(activo=1)
     colors = ['#145cc9', '#1ac914', '#dc3545']
-    #def replace_values_in_string(text, args_dict):
-    #for key in args_dict.keys():
-    #    text = text.replace(key, str(args_dict[key]))
-    #return text
-
+    
     return render(request, 'home/index.html', {'books': books, 'n' : range(1,30), 'bibles':bibles, 'bibles_active':bibles_active})
 
 def sql (traduccion, libro, capitulo, verso):
@@ -29,11 +25,47 @@ def sql (traduccion, libro, capitulo, verso):
     
     return texto.fetchall()[0][0]
 
+def capitulos(request):
+    libro   = request.POST['libro']
+    bible   = pwd+'/bibles/Biblia del Oso.bbli'
+    con     = sqlite3.connect(bible)
+    cursorObj = con.cursor()
+    capitulos = ''
+
+    max = int( cursorObj.execute('SELECT MAX(DISTINCT Chapter) FROM Bible WHERE Book = '+libro).fetchall()[0][0] )
+    
+    for i in range(1,(max+1)):
+        capitulos+= '<option value="'+str(i)+'">'+str(i)+'</option>'
+    
+    data = {'success': 'true', 'capitulos': capitulos}
+
+    return JsonResponse(data)
+
+def versiculos(request):
+    libro       = request.POST['libro']
+    capitulo    = request.POST['capitulo']
+    bible   = pwd+'/bibles/Biblia del Oso.bbli'
+    con     = sqlite3.connect(bible)
+    cursorObj = con.cursor()
+    versiculos = ''
+
+    max = int( cursorObj.execute('SELECT MAX(DISTINCT Verse) FROM Bible WHERE Book = '+libro+' AND Chapter = '+capitulo).fetchall()[0][0] )
+    
+    for i in range(1,(max+1)):
+        versiculos+= '<option value="'+str(i)+'">'+str(i)+'</option>'
+    
+    data = {'success': 'true', 'versiculos': versiculos}
+
+    return JsonResponse(data)
+
+
+
+
 
 def ajax (request):
     libro       = request.POST['libro']
     capitulo    = request.POST['capitulo']
-    verso       = request.POST['verso']
+    verso       = request.POST['versiculo']
     
     args_dict   = { r'\u':'&#', '?':';', r'{\f2':'', r'{\f1':'' }
                         

@@ -35,21 +35,14 @@
               </div>
               <div class="col-sm-2">
                   <select class="form-control" id="capitulo" disabled>
-                      <option>Capítulo</option>
-                      {% for i in n %}
-                        <option value="{{ i }}">{{ i }}</option>  
-                      {% endfor %}  
-                    
-                    </select>
+                      <option>Capítulo</option>  
+                  </select>
                 </div>
                 <div class="col-sm-2">
 
-                    <select class="form-control" id="verso" disabled>
-                        <option>Verso</option>
-                        {% for i in n %}
-                        <option value="{{ i }}">{{ i }}</option>  
-                      {% endfor %}   
-                      </select>
+                    <select class="form-control" id="versiculo" disabled>
+                        <option>Verso</option>       
+                    </select>
                   </div>
                   <div class="col-sm-2 d-none d-sm-block">
                      
@@ -132,14 +125,24 @@
                 </main>
         {% bootstrap_javascript jquery='full' %}
         
-        
-        
         <script>
           $( "#libro" ).change(function() {
             $("#capitulo").prop('disabled', false);
+            $.post( "ajax/capitulos/", { libro: $("#libro").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
+              .done(function( data ) {
+                $("#capitulo").html(data.capitulos);
+
+              });
           });
+
           $( "#capitulo" ).change(function() {
             $("#verso").prop('disabled', false);
+            $("#versiculo").prop('disabled', false);
+            $.post( "ajax/versiculos/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
+              .done(function( data ) {
+                $("#versiculo").html(data.versiculos);
+
+              });
           });
           </script>
           
@@ -162,16 +165,16 @@
                              
               }
           });
-          $( "#verso" ).change(function() {
+          $( "#versiculo" ).change(function() {
             
-            $.post( "ajax/test/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), verso: $("#verso").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
-          .done(function( data ) {
-            {% for bible in bibles_active %}
-              $("#bible{{bible.id}}").html(data.bible{{bible.id}});  
-            {% endfor %}
-            $("#interlineal").html(data.interlineal);
+            $.post( "ajax/test/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), versiculo: $("#versiculo").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
+              .done(function( data ) {
+                {% for bible in bibles_active %}
+                  $("#bible{{bible.id}}").html(data.bible{{bible.id}});  
+                {% endfor %}
+                $("#interlineal").html(data.interlineal);
 
-          });
+              });
             
           });
       
