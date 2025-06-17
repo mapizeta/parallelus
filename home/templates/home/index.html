@@ -1,12 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="description" content="Parallelus - Visor bíblico paralelo con múltiples traducciones">
+        <meta name="author" content="Parallelus">
         <link rel="icon" href="favicon.ico">
         
-        <title>Parallelus BIBLE </title>
+        <title>Parallelus - Visor Bíblico Paralelo</title>
         
         {# Cargamos la librería #}
         {% load bootstrap4 %}
@@ -14,170 +15,249 @@
         {# CSS Bootstrap #}
         {% bootstrap_css %}
         {% load static %}
-        <link href="{% static 'home/offcanvas.css' %}" rel="stylesheet">
+        <link href="{% static 'home/custom.css' %}" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     </head>
-    <body class="bg-light">
-         <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-            <div class="row" style="width:100%">
-              <div class="col-sm-2">
-                  <a class="navbar-brand mr-auto mr-lg-0" href="#">Parallelus</a>
-                  <button id="button-hidden" class="show navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-                     <span class="navbar-toggler-icon"></span>
-                  </button>
-              </div>
-              <div class="col-sm-2">
-                <select class="form-control" id="libro">
-                  <option>Libro</option>
-                    {% for book in books %}
-                      <option value="{{ book.num }}">{{ book.name }}</option>  
-                    {% endfor %}
-                </select>
-              </div>
-              <div class="col-sm-2">
-                  <select class="form-control" id="capitulo" disabled>
-                      <option>Capítulo</option>  
-                  </select>
-                </div>
-                <div class="col-sm-2">
-
-                    <select class="form-control" id="versiculo" disabled>
-                        <option>Verso</option>       
-                    </select>
-                  </div>
-                  <div class="col-sm-2 d-none d-sm-block">
-                     
-                          <input class="form-control" type="text" placeholder="Búsqueda" aria-label="Search">
-                     
-                  </div>
-                  <div class="col-sm-2 d-none d-sm-block">
-                      <button class="btn btn-outline-success" type="submit">Buscar</button>
-                  </div>
-                  
-                  
-
-              </div>
-            </nav>
+    <body>
+        <!-- Navbar mejorado -->
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-book-open me-2"></i>
+                    <span class="brand-text">Parallelus</span>
+                </a>
                 
-                <div class="nav-scroller bg-white shadow-sm">
-                  <nav class="nav nav-underline">
-                    <a class="nav-link active" href="#">Dashboard</a>
-                    <a class="nav-link" href="#">
-                      Friends
-                      <span class="badge badge-pill bg-light align-text-bottom">27</span>
-                    </a>
-                    <a class="nav-link" href="#">Explore</a>
-                    <a class="nav-link" href="#">Suggestions</a>
-                    <a class="nav-link" href="#">Link1</a>
-                    <a class="nav-link" href="#">Link2</a>
-                    </nav>
-                </div>
-                
-                <main role="main" class="container">
-                  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded shadow-sm">
-                        <svg style="font-size: 35px;margin-right: 12px;color: white;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/>
-                            <path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/>
-                        </svg>
-                                       
-                    <div class="lh-100">
-                      <h6 class="mb-0 text-white lh-100">Versiones</h6>
-                      <small>2020</small>
+                <div class="navbar-nav ms-auto">
+                    <div class="nav-item dropdown">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle" type="button" id="bibleSelector" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog me-1"></i>Versiones
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="bibleSelector">
+                            {% for bible in bibles %}
+                            <a class="dropdown-item" href="#" data-bible-id="{{ bible.id }}">
+                                <i class="fas fa-check me-2 {% if bible.activo %}text-success{% else %}text-muted{% endif %}"></i>
+                                {{ bible.label }}
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
-                  </div>
-                
-                  <div class="my-3 p-3 bg-white rounded shadow-sm">
-                    <h6 class="border-bottom border-gray pb-2 mb-0"><div style="font-size: 24px;" id="interlineal">&#64305;&#1456;&#1512;&#1461;&#1488;&#64298;&#1460;&#1497;&#1514; &#64305;&#1464;&#1512;&#1464;&#1488; &#1488;&#1457;&#1500;&#1465;&#1492;&#1460;&#1497;&#1501; &#1488;&#1461;&#1514; &#1492;&#1463;&#64300;&#1464;&#1502;&#1463;&#1497;&#1460;&#1501; &#1493;&#1456;&#1488;&#1461;&#1514; &#1492;&#1464;&#1488;&#1464;&#1512;&#1462;&#1509;</div></h6>
-                    
-                    {% for bible in bibles_active %}
-                    <div class="media text-muted pt-3">
-                        <div><svg style="font-size: 35px;margin-right: 12px;color:#145cc9;" class="bi bi-book" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3.214 1.072C4.813.752 6.916.71 8.354 2.146A.5.5 0 018.5 2.5v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 010 13.5v-11a.5.5 0 01.276-.447L.5 2.5l-.224-.447.002-.001.004-.002.013-.006a5.017 5.017 0 01.22-.103 12.958 12.958 0 012.7-.869zM1 2.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V2.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 001 2.82z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.786 1.072C11.188.752 9.084.71 7.646 2.146A.5.5 0 007.5 2.5v11a.5.5 0 00.854.354c.843-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0016 13.5v-11a.5.5 0 00-.276-.447L15.5 2.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM15 2.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.387-.023-3.426.56V2.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0115 2.82z" clip-rule="evenodd"/></svg></div>
-                        <div style="width:100%">
-                            <strong class="d-block text-gray-dark">@{{ bible.label }}</strong>
-                            <div id="bible{{ bible.id }}"></div>
-                            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray"></p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Contenedor principal -->
+        <div class="main-container">
+            <!-- Panel de navegación -->
+            <div class="navigation-panel">
+                <div class="navigation-card">
+                    <h5 class="card-title">
+                        <i class="fas fa-compass me-2"></i>Navegación
+                    </h5>
+                    <div class="form-group mb-3">
+                        <label for="libro" class="form-label">Libro</label>
+                        <select class="form-select" id="libro">
+                            <option value="">Selecciona un libro</option>
+                            {% for book in books %}
+                            <option value="{{ book.num }}">{{ book.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="capitulo" class="form-label">Capítulo</label>
+                        <select class="form-select" id="capitulo" disabled>
+                            <option value="">Selecciona capítulo</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="versiculo" class="form-label">Versículo</label>
+                        <select class="form-select" id="versiculo" disabled>
+                            <option value="">Selecciona versículo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="content-area">
+                <!-- Header con información del versículo -->
+                <div class="verse-header">
+                    <div class="verse-info">
+                        <h2 id="verse-title">Bienvenido a Parallelus</h2>
+                        <p id="verse-subtitle">Selecciona un libro, capítulo y versículo para comenzar tu estudio bíblico</p>
+                    </div>
+                </div>
+
+                <!-- Texto interlineal -->
+                <div class="interlinear-section">
+                    <div class="interlinear-card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-language me-2"></i>Texto Original</h5>
                         </div>
-                      </div>
-                    {% endfor %}
-                    
-                    <small class="d-block text-right mt-3">
-                      <a href="#">All updates</a>
-                    </small>
-                  </div>
-                
-                  <div class="my-3 p-3 bg-white rounded shadow-sm">
-                    <h6 class="border-bottom border-gray pb-2 mb-0">Traducciones disponibles</h6>
-                    {% for bible in bibles %}
-                    <div class="media text-muted pt-3">
-                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-                        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                          <div class="d-flex justify-content-between align-items-center w-100">
-                            <strong class="text-gray-dark">{{ bible.label }}</strong>
-                            <a href="#bible{{ bible.id }}">Activar</a>
-                          </div>
-                          <span class="d-block">@{{ bible.name }}</span>
+                        <div class="card-body">
+                            <div id="interlineal" class="interlinear-text">
+                                <div class="placeholder-text">
+                                    <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">El texto en hebreo o griego aparecerá aquí</p>
+                                </div>
+                            </div>
                         </div>
-                      </div>  
-                    {% endfor %}
-                    <small class="d-block text-right mt-3">
-                      <a href="#">All suggestions</a>
-                    </small>
-                  </div>
-                </main>
+                    </div>
+                </div>
+
+                <!-- Versiones bíblicas -->
+                <div class="bible-versions-section">
+                    <h4 class="section-title">
+                        <i class="fas fa-bible me-2"></i>Traducciones
+                    </h4>
+                    <div class="bible-grid">
+                        {% for bible in bibles_active %}
+                        <div class="bible-card" id="bible-card-{{bible.id}}">
+                            <div class="bible-header">
+                                <div class="bible-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="bible-info">
+                                    <h6 class="bible-title">{{ bible.label }}</h6>
+                                    <small class="bible-description">{{ bible.description|default:"Traducción bíblica" }}</small>
+                                </div>
+                            </div>
+                            <div class="bible-content">
+                                <div class="bible-text" id="bible{{ bible.id }}">
+                                    <div class="placeholder-text">
+                                        <i class="fas fa-arrow-up text-muted"></i>
+                                        <p class="text-muted">Selecciona un versículo arriba</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">&copy; 2024 Parallelus. Visor Bíblico Paralelo.</p>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small class="text-muted">Desarrollado con <i class="fas fa-heart text-danger"></i> para el estudio bíblico</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
         {% bootstrap_javascript jquery='full' %}
         
         <script>
-          $( "#libro" ).change(function() {
-            $("#capitulo").prop('disabled', false);
-            $.post( "ajax/capitulos/", { libro: $("#libro").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
-              .done(function( data ) {
-                $("#capitulo").html(data.capitulos);
-
-              });
-          });
-
-          $( "#capitulo" ).change(function() {
-            $("#verso").prop('disabled', false);
-            $("#versiculo").prop('disabled', false);
-            $.post( "ajax/versiculos/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
-              .done(function( data ) {
-                $("#versiculo").html(data.versiculos);
-
-              });
-          });
-          </script>
-          
-          <script>
-          
-          $( "#button-hidden" ).click(function() {
-            if($(this).hasClass( "show" ))
-            {
-              $(this).removeClass( "show" );
-              $( "#libro" ).attr("hidden",true);
-              $( "#capitulo" ).attr("hidden",true);
-              $( "#versiculo" ).attr("hidden",true);
+            // Función para actualizar el título del versículo
+            function updateVerseTitle() {
+                const libro = $("#libro option:selected").text();
+                const capitulo = $("#capitulo option:selected").text();
+                const versiculo = $("#versiculo option:selected").text();
+                
+                if (libro && capitulo && versiculo) {
+                    $("#verse-title").text(`${libro} ${capitulo}:${versiculo}`);
+                    $("#verse-subtitle").text("Comparando traducciones bíblicas");
+                } else {
+                    $("#verse-title").text("Bienvenido a Parallelus");
+                    $("#verse-subtitle").text("Selecciona un libro, capítulo y versículo para comenzar tu estudio bíblico");
+                }
             }
-            else
-              {
-                $(this).addClass( "show" );
-                $( "#libro" ).attr("hidden",false);
-                $( "#capitulo" ).attr("hidden",false);
-                $( "#versiculo" ).attr("hidden",false);
-                             
-              }
-          });
-          $( "#versiculo" ).change(function() {
-            
-            $.post( "ajax/test/", { libro: $("#libro").val(), capitulo: $("#capitulo").val(), versiculo: $("#versiculo").val(), 'csrfmiddlewaretoken': '{{ csrf_token }}'  })
-              .done(function( data ) {
-                {% for bible in bibles_active %}
-                  $("#bible{{bible.id}}").html(data.bible{{bible.id}});  
-                {% endfor %}
-                $("#interlineal").html(data.interlineal);
 
-              });
-            
-          });
-      
+            // Cambio de libro
+            $("#libro").change(function() {
+                $("#capitulo").prop('disabled', false);
+                $("#capitulo").html('<option value="">Cargando...</option>');
+                $("#versiculo").prop('disabled', true);
+                $("#versiculo").html('<option value="">Selecciona versículo</option>');
+                
+                updateVerseTitle();
+                
+                $.post("ajax/capitulos/", { 
+                    libro: $("#libro").val(), 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  
+                })
+                .done(function(data) {
+                    if (data.success === 'true') {
+                        $("#capitulo").html(data.capitulos);
+                    } else {
+                        $("#capitulo").html('<option value="">Error al cargar</option>');
+                    }
+                })
+                .fail(function() {
+                    $("#capitulo").html('<option value="">Error de conexión</option>');
+                });
+            });
+
+            // Cambio de capítulo
+            $("#capitulo").change(function() {
+                $("#versiculo").prop('disabled', false);
+                $("#versiculo").html('<option value="">Cargando...</option>');
+                
+                updateVerseTitle();
+                
+                $.post("ajax/versiculos/", { 
+                    libro: $("#libro").val(), 
+                    capitulo: $("#capitulo").val(), 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  
+                })
+                .done(function(data) {
+                    if (data.success === 'true') {
+                        $("#versiculo").html(data.versiculos);
+                    } else {
+                        $("#versiculo").html('<option value="">Error al cargar</option>');
+                    }
+                })
+                .fail(function() {
+                    $("#versiculo").html('<option value="">Error de conexión</option>');
+                });
+            });
+
+            // Cambio de versículo
+            $("#versiculo").change(function() {
+                updateVerseTitle();
+                
+                // Mostrar loading
+                $("#interlineal").html('<div class="loading-container"><div class="loading"></div><p>Cargando texto...</p></div>');
+                {% for bible in bibles_active %}
+                $("#bible{{bible.id}}").html('<div class="loading-container"><div class="loading"></div><p>Cargando...</p></div>');
+                {% endfor %}
+                
+                $.post("ajax/test/", { 
+                    libro: $("#libro").val(), 
+                    capitulo: $("#capitulo").val(), 
+                    versiculo: $("#versiculo").val(), 
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'  
+                })
+                .done(function(data) {
+                    if (data.success === 'true') {
+                        {% for bible in bibles_active %}
+                        $("#bible{{bible.id}}").html(data.bible{{bible.id}});
+                        {% endfor %}
+                        $("#interlineal").html(data.interlineal);
+                    } else {
+                        $("#interlineal").html('<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Error: ' + (data.error || 'Error desconocido') + '</div>');
+                        {% for bible in bibles_active %}
+                        $("#bible{{bible.id}}").html('<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Error al cargar el texto</div>');
+                        {% endfor %}
+                    }
+                })
+                .fail(function() {
+                    $("#interlineal").html('<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Error de conexión</div>');
+                    {% for bible in bibles_active %}
+                    $("#bible{{bible.id}}").html('<div class="error-message"><i class="fas fa-exclamation-triangle"></i> Error de conexión</div>');
+                    {% endfor %}
+                });
+            });
+
+            // Inicializar tooltips
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         </script>
     </body>
 </html>

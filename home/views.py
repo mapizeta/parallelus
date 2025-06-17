@@ -16,56 +16,69 @@ def index (request):
     return render(request, 'home/index.html', {'books': books, 'n' : range(1,30), 'bibles':bibles, 'bibles_active':bibles_active})
 
 def sql (traduccion, libro, capitulo, verso):
-    
     bible = pwd+'/bibles/'+traduccion
     con = sqlite3.connect(bible)
     
     cursorObj = con.cursor()
-    texto = cursorObj.execute('select Scripture from Bible WHERE Book = '+libro+' AND Chapter = '+capitulo+' AND Verse = '+verso)
+    cursorObj.execute('SELECT Scripture FROM Bible WHERE Book = ? AND Chapter = ? AND Verse = ?', 
+                     (libro, capitulo, verso))
+    result = cursorObj.fetchall()
+    con.close()
     
-    return texto.fetchall()[0][0]
+    return result[0][0] if result else ""
 
 def capitulos(request):
-    libro   = request.POST['libro']
+    libro   = request.POST.get('libro')
+    if not libro:
+        return JsonResponse({'success': 'false', 'error': 'Libro requerido'})
+        
     bible   = pwd+'/bibles/Biblia del Oso.bbli'
     con     = sqlite3.connect(bible)
     cursorObj = con.cursor()
     capitulos = '<option value="">Capítulo</option>'
 
-    max = int( cursorObj.execute('SELECT MAX(DISTINCT Chapter) FROM Bible WHERE Book = '+libro).fetchall()[0][0] )
+    cursorObj.execute('SELECT MAX(DISTINCT Chapter) FROM Bible WHERE Book = ?', (libro,))
+    max_chapter = cursorObj.fetchall()[0][0]
+    con.close()
     
-    for i in range(1,(max+1)):
-        capitulos+= '<option value="'+str(i)+'">'+str(i)+'</option>'
+    if max_chapter:
+        for i in range(1, int(max_chapter) + 1):
+            capitulos += f'<option value="{i}">{i}</option>'
     
     data = {'success': 'true', 'capitulos': capitulos}
-
     return JsonResponse(data)
 
 def versiculos(request):
-    libro       = request.POST['libro']
-    capitulo    = request.POST['capitulo']
+    libro       = request.POST.get('libro')
+    capitulo    = request.POST.get('capitulo')
+    
+    if not libro or not capitulo:
+        return JsonResponse({'success': 'false', 'error': 'Libro y capítulo requeridos'})
+        
     bible   = pwd+'/bibles/Biblia del Oso.bbli'
     con     = sqlite3.connect(bible)
     cursorObj = con.cursor()
     versiculos = '<option value="">Selecciona Verso</option>'
 
-    max = int( cursorObj.execute('SELECT MAX(DISTINCT Verse) FROM Bible WHERE Book = '+libro+' AND Chapter = '+capitulo).fetchall()[0][0] )
+    cursorObj.execute('SELECT MAX(DISTINCT Verse) FROM Bible WHERE Book = ? AND Chapter = ?', 
+                     (libro, capitulo))
+    max_verse = cursorObj.fetchall()[0][0]
+    con.close()
     
-    for i in range(1,(max+1)):
-        versiculos+= '<option value="'+str(i)+'">'+str(i)+'</option>'
+    if max_verse:
+        for i in range(1, int(max_verse) + 1):
+            versiculos += f'<option value="{i}">{i}</option>'
     
     data = {'success': 'true', 'versiculos': versiculos}
-
     return JsonResponse(data)
 
-
-
-
-
 def ajax (request):
-    libro       = request.POST['libro']
-    capitulo    = request.POST['capitulo']
-    verso       = request.POST['versiculo']
+    libro       = request.POST.get('libro')
+    capitulo    = request.POST.get('capitulo')
+    verso       = request.POST.get('versiculo')
+    
+    if not all([libro, capitulo, verso]):
+        return JsonResponse({'success': 'false', 'error': 'Todos los campos son requeridos'})
     
     args_dict   = { r'\u':'&#', '?':';', r'{\f2':'', r'{\f1':'' }
                         
@@ -89,6 +102,9 @@ def ajax (request):
     data = {'success': 'true', 'interlineal': interlineal}
 
     for bible in bibles_active:
-        data["bible"+str(bible.id)] = sql (bible.file, libro, capitulo, verso)
+        try:
+            data["bible"+str(bible.id)] = sql (bible.file, libro, capitulo, verso)
+        except Exception as e:
+            data["bible"+str(bible.id)] = f"Error: {str(e)}"
        
     return JsonResponse(data)
